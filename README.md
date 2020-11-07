@@ -24,11 +24,16 @@ npm install --save react-native-signature-canvas
 npm install --save react-native-signature-canvas@1.4.2
 ```
 
+## 注意
+该项目fork自[react-native-signature-canvas](https://github.com/YanYuanFE/react-native-signature-canvas)
+安卓5.0无法签字，目前去除了`onBegin` `onEnd`方法测试正常。
+
 ## Usage
 
 ``` js
-import Signature from 'react-native-signature-canvas';
+import Signature from '@xyf/react-native-signature-canvas';
 ```
+
 
 ## Properties
 -------------
@@ -37,12 +42,12 @@ import Signature from 'react-native-signature-canvas';
 | descriptionText | `string` | description text for signature |
 | clearText | `string` | clear button text |
 | confirmText | `string` | save button text |
-| webStyle | `string` | webview style for overwrite default style, all style: https://github.com/YanYuanFE/react-native-signature-canvas/blob/master/h5/css/signature-pad.css |
+| webStyle | `string` | webview style for overwrite default style, all style: https://github.com/xingyuefeng/react-native-signature-canvas/blob/master/h5/css/signature-pad.css |
 | onOK | `function` | handle function when you click save button |
 | onEmpty | `function` | handle function of empty signature when you click save button |
 | onClear | `function` | handle function when you click clear button 
-| onBegin | `function` | handle function when a new stroke is started 
-| onEnd | `function` | handle function when the stroke has ended 
+| onBegin | `function` | 暂去除
+| onEnd | `function` | 暂去除
 | customHtml | `function` | html string that lets you modify things like the layout or elements.
 | autoClear | `boolean` | is auto clear the signature after click confirm button 
 | imageType | `string` | default is "", "image/jpeg"、"image/svg+xml", imageType of export signature
@@ -133,7 +138,7 @@ const handleSignature = signature => {
   clearText="Clear"
   // save button text
   confirmText="Save"
-  // String, webview style for overwrite default style, all style: https://github.com/YanYuanFE/react-native-signature-canvas/blob/master/h5/css/signature-pad.css
+  // String, webview style for overwrite default style, all style: https://github.com/xingyuefeng/react-native-signature-canvas/blob/master/h5/css/signature-pad.css
   webStyle={`.m-signature-pad--footer
     .button {
       background-color: red;

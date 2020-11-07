@@ -1,6 +1,6 @@
 {
-  "name": "react-native-signature-canvas",
-  "version": "3.2.0",
+  "name": "react-native-signature-canvas-fixed",
+  "version": "1.0.0",
   "description": "React Native Signature Component based Canvas for Android && IOS && expo",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YanYuanFE/react-native-signature-canvas.git"
+    "url": "git@github.com:xingyuefeng/react-native-signature-canvas.git"
   },
   "keywords": [
     "react-native",
@@ -20,12 +20,12 @@
     "canvas",
     "expo"
   ],
-  "author": "YanYuanFE",
+  "author": "xing15262870437",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/YanYuanFE/react-native-signature-canvas/issues"
+    "url": "https://github.com/xingyuefeng/react-native-signature-canvas/issues"
   },
-  "homepage": "https://github.com/YanYuanFE/react-native-signature-canvas#readme",
+  "homepage": "https://github.com/xingyuefeng/react-native-signature-canvas#readme",
   "devDependencies": {
     "react-native-webview": "^10.9.0"
   },
