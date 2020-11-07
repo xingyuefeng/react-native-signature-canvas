@@ -26,8 +26,8 @@ const content = `
     resizeCanvas();
     
     signaturePad = new SignaturePad(canvas, {
-        onBegin: () => window.ReactNativeWebView.postMessage("BEGIN"),
-        onEnd: () => window.ReactNativeWebView.postMessage("END"),
+        // onBegin: () => window.ReactNativeWebView.postMessage("BEGIN"),
+        // onEnd: () => window.ReactNativeWebView.postMessage("END"),
         penColor: '<%penColor%>',
         backgroundColor: '<%backgroundColor%>',
         dotSize: <%dotSize%>,
