@@ -1,9 +1,8 @@
 # react-native-signature-canvas
 
-[![](https://img.shields.io/npm/l/react-native-signature-canvas.svg)](https://www.npmjs.com/package/react-native-signature-canvas)
-[![](https://img.shields.io/npm/v/react-native-signature-canvas)](https://www.npmjs.com/package/react-native-signature-canvas)
-![npm](https://img.shields.io/npm/dt/react-native-signature-canvas)
-![GitHub last commit](https://img.shields.io/github/last-commit/yanyuanfe/react-native-signature-canvas)
+[![](https://img.shields.io/npm/l/react-native-signature-canvas-fixed.svg)](https://www.npmjs.com/package/react-native-signature-canvas-fixed)
+[![](https://img.shields.io/npm/v/react-native-signature-canvas-fixed)](https://www.npmjs.com/package/react-native-signature-canvas-fixed)
+![npm](https://img.shields.io/npm/dt/react-native-signature-canvas-fixed)
 
 
 React Native Signature Component based Canvas for Android &amp;&amp; IOS &amp;&amp; expo
@@ -19,7 +18,7 @@ Note: Expo support for React Native Signature Canvas v1.5.0 started with Expo SD
 ## Installation(for React Native V0.60.0 or Expo SDK v35.0.0)
 
 ```bash
-npm install --save react-native-signature-canvas
+npm install --save react-native-signature-canvas-fixed
 ```
 
 ## Installation(for React Native V0.5x.x or Expo SDK < v33)
