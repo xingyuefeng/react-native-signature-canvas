@@ -8,7 +8,7 @@ import Sign from './Sign';
 const App = () => {
   const [signature, setSign] = useState(null);
   const [value, onChangeText] = useState('Useless Placeholder');
-  const [desc, setDesc] = useState("please sign");
+  const [desc, setDesc] = useState("Please Sign");
 
   const handleSignature = signature => {
     console.log(signature);
@@ -29,13 +29,9 @@ const App = () => {
     console.log('Empty');
   }
 
-  handleClear = () => {
-    console.log('clear success!');
-  }
-
   return (
     <View style={{ flex: 1, paddingTop: 40 }}>
-      <View style={styles.preview}>
+      {/* <View style={styles.preview}>
         {signature ? (
           <Image
             resizeMode={"contain"}
@@ -43,7 +39,7 @@ const App = () => {
             source={{ uri: signature }}
           />
         ) : null}
-      </View>
+      </View> */}
       <Sign
         onOK={handleSignature} 
         text={desc}
@@ -56,7 +52,7 @@ export default App;
 
 const styles = StyleSheet.create({
   preview: {
-    height: 114,
+    height: 50,
     backgroundColor: "#F8F8F8",
     justifyContent: "center",
     alignItems: "center",

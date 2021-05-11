@@ -198,7 +198,7 @@ const content = `
                       return (this.minWidth + this.maxWidth) / 2;
                   };
           this.penColor = options.penColor || 'black';
-          this.backgroundColor = options.backgroundColor || 'rgba(0,0,0,0)';
+          this.backgroundColor = options.backgroundColor || 'rgba(255,255,255,1)';
           this.onBegin = options.onBegin;
           this.onEnd = options.onEnd;
           this._ctx = canvas.getContext('2d');
@@ -359,7 +359,11 @@ const content = `
       };
       SignaturePad.prototype._createPoint = function (x, y) {
           var rect = this.canvas.getBoundingClientRect();
-          return new Point(x - rect.left, y - rect.top, new Date().getTime());
+          if (<%orientation%>) {
+            return new Point(y - rect.top, rect.left+rect.width-x, new Date().getTime());
+          } else {
+            return new Point(x - rect.left, y - rect.top, new Date().getTime());
+          }
       };
       SignaturePad.prototype._addPoint = function (point) {
           var _lastPoints = this._lastPoints;

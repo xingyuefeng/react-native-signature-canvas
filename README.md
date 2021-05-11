@@ -1,6 +1,10 @@
 # react-native-signature-canvas
 
 [![](https://img.shields.io/npm/l/react-native-signature-canvas.svg)](https://www.npmjs.com/package/react-native-signature-canvas)
+[![](https://img.shields.io/npm/v/react-native-signature-canvas)](https://www.npmjs.com/package/react-native-signature-canvas)
+![npm](https://img.shields.io/npm/dt/react-native-signature-canvas)
+![GitHub last commit](https://img.shields.io/github/last-commit/yanyuanfe/react-native-signature-canvas)
+
 
 React Native Signature Component based Canvas for Android &amp;&amp; IOS &amp;&amp; expo
 
@@ -38,7 +42,7 @@ import Signature from '@xyf/react-native-signature-canvas';
 ## Properties
 -------------
 | Prop  | Type | Description |
-| :------------ |:---------------:| :---------------| 
+| :------------ |:---------------:| :---------------|
 | descriptionText | `string` | description text for signature |
 | clearText | `string` | clear button text |
 | confirmText | `string` | save button text |
@@ -49,13 +53,17 @@ import Signature from '@xyf/react-native-signature-canvas';
 | onBegin | `function` | 暂去除
 | onEnd | `function` | 暂去除
 | customHtml | `function` | html string that lets you modify things like the layout or elements.
-| autoClear | `boolean` | is auto clear the signature after click confirm button 
+| autoClear | `boolean` | is auto clear the signature after click confirm button
+| trimWhitespace | `boolean` | trim image whitespace
+| rotated | `boolean` | rotate signature pad 90 degrees
 | imageType | `string` | default is "", "image/jpeg"、"image/svg+xml", imageType of export signature
 | dataURL | `string` | default is "", Base64 string, Draws signature image from data URL.
 | penColor | `string` | default is "black", color of pen
-| backgroundColor | `string` | default is "rgba(0,0,0,0)", backgroundColor of canvas
+| backgroundColor | `string` | default is "rgba(255,255,255,1)", backgroundColor of canvas
 | dotSize | `number` | radius of a single dot
 | minWidth | `number` | minimum width of a line. Defaults to 0.5
+| androidHardwareAccelerationDisabled | `boolean` |androidHardwareAccelerationDisabled for react-native-webview. Default is false
+| style | `object` | style of wrapper view
 
 ## Methods
 -------------
@@ -92,10 +100,10 @@ const Sign = ({text, onOK}) => {
     <SignatureScreen
         ref={ref}
         onEnd={handleEnd}
-        onOK={handleSignature} 
+        onOK={handleSignature}
         onEmpty={handleEmpty}
         onClear={handleClear}
-        autoClear={true} 
+        autoClear={true}
         descriptionText={text}
     />
   );
@@ -154,12 +162,12 @@ If you create your own triggers for the readSignature and/or clearSignature you 
 
 ``` js
 const webStyle = `.m-signature-pad--footer
-	.save {
-		display: none;
-	}
-	.clear {
-		display: none;
-	}
+    .save {
+        display: none;
+    }
+    .clear {
+        display: none;
+    }
 `;
 ...
   <Signature
@@ -168,6 +176,74 @@ const webStyle = `.m-signature-pad--footer
     onEmpty={handleEmpty}
     onEnd={handleEnd}
   />
+
+```
+
+## Custom Button for Confirm and Clear
+
+``` js
+import React, {useRef} from 'react';
+import { StyleSheet, View, Button } from 'react-native';
+import SignatureScreen from 'react-native-signature-canvas';
+
+const Sign = ({onOK}) => {
+  const ref = useRef();
+
+  const handleSignature = signature => {
+    console.log(signature);
+    onOK(signature);
+  };
+
+  const handleClear = () => {
+    ref.current.clearSignature();
+  }
+
+  const handleConfirm = () => {
+    console.log("end");
+    ref.current.readSignature();
+  }
+
+  const style = `.m-signature-pad--footer {display: none; margin: 0px;}`;
+
+  return (
+    <View style={styles.container}>
+      <SignatureScreen
+          ref={ref}
+          onOK={handleSignature} 
+          webStyle={style}
+      />
+      <View style={styles.row}>
+        <Button
+            title="Clear"
+            onPress={handleClear}
+        />
+        <Button
+          title="Confirm"
+          onPress={handleConfirm}
+        />
+      </View>
+    </View>
+  );
+}
+
+export default Sign;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 250,
+    padding: 10,
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    width: '100%',
+    alignItems: 'center',
+  }
+});
 
 ```
 
@@ -182,7 +258,7 @@ const webStyle = `.m-signature-pad--footer
 
 
 ```js
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import Signature from 'react-native-signature-canvas';
 
@@ -206,17 +282,17 @@ export const SignatureScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.preview}>
-        {this.state.signature ? (
+        {signature ? (
           <Image
             resizeMode={"contain"}
             style={{ width: 335, height: 114 }}
-            source={{ uri: this.state.signature }}
+            source={{ uri: signature }}
           />
         ) : null}
       </View>
       <Signature
-        onOK={this.handleSignature}
-        onEmpty={this.handleEmpty}
+        onOK={handleSignature}
+        onEmpty={handleEmpty}
         descriptionText="Sign"
         clearText="Clear"
         confirmText="Save"
@@ -287,10 +363,10 @@ const Sign: React.FC<Props> = ({text, onOK}) => {
     <SignatureScreen
         ref={ref}
         onEnd={handleEnd}
-        onOK={handleSignature} 
+        onOK={handleSignature}
         onEmpty={handleEmpty}
         onClear={handleClear}
-        autoClear={true} 
+        autoClear={true}
         descriptionText={text}
     />
   );
@@ -298,4 +374,38 @@ const Sign: React.FC<Props> = ({text, onOK}) => {
 
 export default Sign;
 
+```
+
+## Example inside ScrollView
+
+When using `react-native-signature-canvas` inside a ScrollView, you will only get a point on the canvas and the ScrollView will handle the gesture making it unused for the canvas.
+The work around is to use the `scrollEnabled` prop of `ScrollView`.
+Here an example:
+
+```
+import React, {useState} from 'react';
+import {ScrollView, View} from 'react-native';
+import Signature from 'react-native-signature-canvas';
+
+const SignInScroll = () => {
+  const [scrollEnabled, setScrollEnabled] = useState(true);
+
+  return (
+    <ScrollView scrollEnabled={scrollEnabled}>
+      <View style={{height: 300}}>
+        <Signature
+          onOK={(img) => console.log(img)}
+          onBegin={() => setScrollEnabled(false)}
+          onEnd={() => setScrollEnabled(true)}
+          descriptionText="Sign"
+          clearText="Clear"
+          confirmText="Save"
+          imageType="image/jpeg"
+        />
+      </View>
+    </ScrollView>
+  );
+};
+
+export default SignInScroll;
 ```
